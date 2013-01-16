@@ -4,6 +4,7 @@ public class Client extends Person{
 	
 	public double weight;
 	
+	// hoi
 	public int iq;
 	
 //	TODO: Maybe change int to enum
