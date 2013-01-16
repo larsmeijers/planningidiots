@@ -5,5 +5,6 @@ public enum MusicTaste {
 	NederlandsTalig,
 	Top40,
 	KinderMuziek,
+	NotApplicable,
 
 }

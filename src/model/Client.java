@@ -35,6 +35,8 @@ public class Client extends Person{
 	
 	public MusicTaste musicPreference;
 	
+	public Theme prefferedHoliday;
+	
 	
 
 }
