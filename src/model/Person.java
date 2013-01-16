@@ -1,8 +1,9 @@
 package model;
 
+import java.beans.PropertyChangeListener;
 import java.util.Date;
 
-public abstract class Person  {
+public abstract class Person implements PropertyChangeListener{
 	
 	public String name;
 	
@@ -19,5 +20,22 @@ public abstract class Person  {
 	public String insurenceNumber;
 	
 	public String email;
+	
+	public String getName(){
+		return name;
+	}
+	
+	public void setName(String _name){
+		name = _name;
+	}
+	
+	public char getSex(){
+		//giggety
+		return sex;
+	}
+	
+	public void setSex(char _sex){
+		sex = _sex;
+	}
 	
 }

@@ -4,10 +4,12 @@
 ;; using their properties
 
 (import model.*)
-(deftemplate Client       	(declare (from-class Client)))
-(deftemplate Group		  	(declare (from-class Group)))
-(deftemplate Holiday		(declare (from-class Holiday)))
-(deftemplate Person    		(declare (from-class Person)))
-(deftemplate Theme    		(declare (from-class Theme)))
+(deftemplate Group		 				 	(declare (from-class Group)))
+(deftemplate Holiday						(declare (from-class Holiday)))
+(deftemplate Person    						(declare (from-class Person)))
+(deftemplate Theme    						(declare (from-class Theme)))
+(deftemplate Client extends Person       	(declare (from-class Client)))
 
-;; Rules
+
+
+;; rules

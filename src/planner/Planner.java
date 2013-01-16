@@ -86,21 +86,11 @@ public class Planner {
 				engine.addAll(data.clients);
 				engine.add(group);
 				engine.run();
+
 			} catch (JessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			Iterator test = engine.getObjects(new Filter.ByClass(Group.class));
-			while(test.hasNext()){
-				Group thisGroup = (Group)test.next();
-				for(int i = 0; i < thisGroup.getSize(); i++){
-					System.out.printf("%s \n", thisGroup.getClient(i).name);
-				}
-			}
-			
-			
-			
 		}
 	}
 	
