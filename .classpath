@@ -3,5 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/Users/larsmeijers/Downloads/Jess71p2/lib/jess.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Jess71p2/lib/jess.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Floris/Documents/vu/ke/impl/xstream-1.4.3/lib/xstream-1.4.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
