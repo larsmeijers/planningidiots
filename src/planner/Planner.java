@@ -5,10 +5,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Scanner;
+
+import jess.Filter;
+import jess.JessException;
+import jess.Rete;
 
 
 import model.Client;
+import model.Group;
 import model.MusicTaste;
 import model.Theme;
 import data.Database;
@@ -16,6 +22,7 @@ import data.Database;
 public class Planner {
 	
 	private Database data;
+	private Rete engine;
 	
 	public static void main(String[] args) {
 		
@@ -50,7 +57,7 @@ public class Planner {
 				    plan.exportExampleClient();
 					break;
 				case "plan":
-
+					plan.planGroups();
 					break;
 				case "quit":
 				exit = true;
@@ -62,6 +69,39 @@ public class Planner {
 				}		        	        
 		}
 				
+	}
+	
+	private void planGroups(){
+		if(data.clients.isEmpty()){
+			System.out.println("Import data before planning!");
+		} else{
+			try {
+				Group group = new Group();
+				for(int i=0; i < data.clients.size(); i++){
+					group.addClientToGroup(data.clients.get(i));
+				}
+
+				engine.reset();
+				engine.batch("rules.clp");
+				engine.addAll(data.clients);
+				engine.add(group);
+				engine.run();
+			} catch (JessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			Iterator test = engine.getObjects(new Filter.ByClass(Group.class));
+			while(test.hasNext()){
+				Group thisGroup = (Group)test.next();
+				for(int i = 0; i < thisGroup.getSize(); i++){
+					System.out.printf("%s \n", thisGroup.getClient(i).name);
+				}
+			}
+			
+			
+			
+		}
 	}
 	
 	private void importData() {
@@ -123,6 +163,8 @@ public class Planner {
 	public Planner(String[] args) 
 	{
 		data = new Database(args[0]);
+		
+		engine = new Rete();
 	}
 
 }

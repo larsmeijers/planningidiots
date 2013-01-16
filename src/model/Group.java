@@ -4,24 +4,34 @@ import java.util.ArrayList;
 
 public class Group {
 
+	public int maxSize;
+    private ArrayList<Client> clients;
+    
+    public Group(){
+    	clients = new ArrayList<Client>();
+    }
+    
 	public int getSize()
 	{
 		return clients.size();
 	}
-	
-	public int maxSize;
-	
-    private ArrayList<Person> clients;
-    
-    public void addPersonToGroup(Person pers)
+
+    public void addClientToGroup(Client client)
     {
-    	clients.add(pers);
+    	clients.add(client);
     }
     
-    public void removePersonFromGroup(Person pers)
+    public void removeClientFromGroup(Client client)
     {
-    	clients.remove(pers);
+    	clients.remove(client);
     }
 	
+    public ArrayList<Client> getClients(){
+    	return clients;
+    }
+    
+    public Client getClient(int index){
+    	return clients.get(index);
+    }
 	
 }

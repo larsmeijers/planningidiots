@@ -15,12 +15,13 @@ public class Database {
 	
 	private String filePath;
 	private XStream xml_io;
+	public ArrayList<Client> clients;
 	
 	public Database(String _path)
 	{
 		xml_io = new XStream();
 		xml_io.alias("client", Client.class);
-		
+		clients = new ArrayList<Client>();
 		filePath = _path;
 	}
 	
@@ -43,7 +44,6 @@ public class Database {
 	public ArrayList<Client> importClientsFromXML()
 	{				
 			File dir = new File(filePath);
-			ArrayList<Client> clients = new ArrayList<Client>();
 			if (dir.isDirectory())
 			{
 				
@@ -56,5 +56,4 @@ public class Database {
 			return clients;
 		
 	}
-
 }

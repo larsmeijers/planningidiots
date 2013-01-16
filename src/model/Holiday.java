@@ -21,14 +21,14 @@ public class Holiday {
 		participants = new Group();
 	}
 	
-	public void addParticipant(Person participant)
+	public void addParticipant(Client participant)
 	{
-		participants.addPersonToGroup(participant);
+		participants.addClientToGroup(participant);
 	}
 	
-	public void removeParticipant(Person participant)
+	public void removeParticipant(Client participant)
 	{
-		participants.removePersonFromGroup(participant);
+		participants.removeClientFromGroup(participant);
 	}
 
 }
