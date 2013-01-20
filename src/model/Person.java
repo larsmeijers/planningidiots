@@ -1,9 +1,8 @@
 package model;
 
-import java.beans.PropertyChangeListener;
 import java.util.Date;
 
-public abstract class Person implements PropertyChangeListener{
+public abstract class Person{
 	
 	public String name;
 	

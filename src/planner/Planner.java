@@ -11,11 +11,13 @@ import java.util.Scanner;
 import jess.Filter;
 import jess.JessException;
 import jess.Rete;
+import jess.Filter.ByClass;
 
 
 import model.Client;
 import model.Group;
 import model.MusicTaste;
+import model.Person;
 import model.Theme;
 import data.Database;
 
@@ -86,11 +88,14 @@ public class Planner {
 				engine.addAll(data.clients);
 				engine.add(group);
 				engine.run();
-
+				
+				
+				
 			} catch (JessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 		}
 	}
 	

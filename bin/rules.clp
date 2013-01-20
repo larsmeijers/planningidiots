@@ -10,6 +10,10 @@
 (deftemplate Theme    						(declare (from-class Theme)))
 (deftemplate Client extends Person       	(declare (from-class Client)))
 
-
-
 ;; rules
+
+;; queries
+
+;; functions
+
+;; facts
