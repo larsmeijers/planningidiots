@@ -14,15 +14,16 @@
   <horseRidingSkill>-1</horseRidingSkill>
   <independenceLevel>4</independenceLevel>
   <mobilityLevel>5</mobilityLevel>
-  <toleranceOfStress>5</toleranceOfStress>
+  <sensibilityForStress>5</sensibilityForStress>
   <presenceLevel>3</presenceLevel>
   <sailingIQ>-1</sailingIQ>
-  <hoursOfCarePerDay>3</hoursOfCarePerDay>
+  <carePerDay>3</carePerDay>
   <fishingSeriousness>-1</fishingSeriousness>
   <needsOneToOneGuidance>false</needsOneToOneGuidance>
-  <hasDiet>false</hasDiet>
+  <hasHardnessScore>0</hasHardnessScore>
+  <hasDiet>true</hasDiet>
   <hasAllergy>false</hasAllergy>
   <musicPreference>Top40</musicPreference>
   <prefferedHoliday>Music</prefferedHoliday>
-    <isPlanned>false</isPlanned>
+  <isPlanned>false</isPlanned>
 </client>

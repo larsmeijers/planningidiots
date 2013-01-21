@@ -48,7 +48,10 @@ public class Database {
 			{
 				
 			  for (File child : dir.listFiles()) {	    
+				  if(child.getName().endsWith("xml"))
+				  {
 				  clients.add((Client)xml_io.fromXML(child));
+				  }
 			  }
 			  
 			}

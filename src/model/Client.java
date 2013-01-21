@@ -3,6 +3,8 @@ package model;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 public class Client extends Person{
 	
 private double weight;
@@ -19,17 +21,19 @@ private int independenceLevel;
 	
 private int mobilityLevel;
 	
-private int toleranceOfStress;
+private int sensibilityForStress;
 	
 private int presenceLevel;
 	
 private int sailingIQ;
 	
-private int hoursOfCarePerDay;
+private int carePerDay;
 	
 private int fishingSeriousness;
 	
-private Boolean needsOneToOneGuidance;
+private boolean needsOneToOneGuidance;
+
+private int hasHardnessScore;
 	
 private Boolean hasDiet;
 	
@@ -41,6 +45,7 @@ private Theme prefferedHoliday;
 
 private boolean isPlanned;
 
+@XStreamOmitField
 private PropertyChangeSupport pcs;
 
 public Client()
@@ -104,13 +109,6 @@ public void setMobilityLevel(int mobilityLevel) {
 	this.mobilityLevel = mobilityLevel;
 }
 
-public int getToleranceOfStress() {
-	return toleranceOfStress;
-}
-
-public void setToleranceOfStress(int toleranceOfStress) {
-	this.toleranceOfStress = toleranceOfStress;
-}
 
 public int getPresenceLevel() {
 	return presenceLevel;
@@ -128,13 +126,6 @@ public void setSailingIQ(int sailingIQ) {
 	this.sailingIQ = sailingIQ;
 }
 
-public int getHoursOfCarePerDay() {
-	return hoursOfCarePerDay;
-}
-
-public void setHoursOfCarePerDay(int hoursOfCarePerDay) {
-	this.hoursOfCarePerDay = hoursOfCarePerDay;
-}
 
 public int getFishingSeriousness() {
 	return fishingSeriousness;
@@ -148,8 +139,11 @@ public Boolean getNeedsOneToOneGuidance() {
 	return needsOneToOneGuidance;
 }
 
-public void setNeedsOneToOneGuidance(Boolean needsOneToOneGuidance) {
-	this.needsOneToOneGuidance = needsOneToOneGuidance;
+
+public void setNeedsOneToOneGuidance(boolean _needsOneToOneGuidance) {
+	pcs.firePropertyChange("needsOneToOneGuidance",this.needsOneToOneGuidance , _needsOneToOneGuidance);
+	this.needsOneToOneGuidance = _needsOneToOneGuidance;
+	
 }
 
 public Boolean getHasDiet() {
@@ -206,6 +200,31 @@ public void removePropertyChangeListener(PropertyChangeListener pcl) {
 		pcs = new PropertyChangeSupport(this);
 	}
     pcs.removePropertyChangeListener(pcl);
+}
+
+public int getHasHardnessScore() {
+	return hasHardnessScore;
+}
+
+public void setHasHardnessScore(int _hasHardnessScore) {
+	pcs.firePropertyChange("hasHardnessScore",this.hasHardnessScore , _hasHardnessScore);
+	this.hasHardnessScore = _hasHardnessScore;
+}
+
+public int getSensibilityForStress() {
+	return sensibilityForStress;
+}
+
+public void setSensibilityForStress(int sensibilityForStress) {
+	this.sensibilityForStress = sensibilityForStress;
+}
+
+public int getCarePerDay() {
+	return carePerDay;
+}
+
+public void setCarePerDay(int carePerDay) {
+	this.carePerDay = carePerDay;
 }
 
 }

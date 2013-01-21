@@ -94,11 +94,11 @@ public class Planner {
 				{
 					Holiday hol =(Holiday) hols.next();
 					//System.out.println(hol.getHolidayTheme());
-					for(int i =0; i < hol.getNumberOfParticipants(); i++)
-					{
-					System.out.println(hol.getParticipant(i).getName());
-					}
-				
+//					for(int i =0; i < hol.getNumberOfParticipants(); i++)
+//					{
+//					System.out.println(hol.getParticipant(i).getName());
+//					}
+//				
 				}
 
 			} catch (JessException e) {
@@ -160,7 +160,7 @@ public class Planner {
 			client.setHasAllergy(false);
 			client.setHasDiet(false);
 			client.setHorseRidingSkill(-1);
-			client.setHoursOfCarePerDay(3);
+			client.setCarePerDay(3);
 			client.setIndependenceLevel(4);
 			client.insurenceNumber = "123214";
 			client.setIq(75);
@@ -172,7 +172,7 @@ public class Planner {
 			client.sex = 'm';
 			client.setSocialSkill(4);
 			client.telephoneNumber = "1234981423";
-			client.setToleranceOfStress(5);
+			client.setSensibilityForStress(5);
 			client.setWeight(95);
 			client.setPrefferedHoliday(Theme.Music);
 			client.setIsPlanned(false);
