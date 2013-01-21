@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.util.Date;
 
 public class Holiday {
@@ -71,6 +72,10 @@ public class Holiday {
 
 	public int getMaxParticipants() {
 		return maxParticipants;
+	}
+
+	public Client getParticipant(int i) {
+		return participants.getClient(i);
 	}
 
 

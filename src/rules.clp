@@ -20,13 +20,15 @@
 -(defrule FillEmptyHolidays    
    (Holiday(numberOfParticipants 0) (OBJECT ?h)) ;; probere rechtstreekse cast naar object ?
    (Client(prefferedHoliday h.holidayTheme) (OBJECT ?c))
-   
+     
    ?hfact <-(Holiday {numberOfParticipants == 0}) 
    ?cfact <-(Client {prefferedHoliday == hfact.holidayTheme})
-
    =>
-   (call ?h addParticipant c)
-   (printout t c.name crlf)
+;   (bind ?f (?h))
+
+   (call ?c name "hoi")
+   (printout t ?cfact.name crlf)
+   (printout t ?hfact.holidayTheme crlf)
 )
 
 ;; queries
