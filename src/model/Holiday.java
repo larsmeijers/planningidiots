@@ -1,5 +1,7 @@
 package model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.util.Date;
 
@@ -15,7 +17,10 @@ public class Holiday {
 	
 	private int maxParticipants;
 	
+	private int numberOfParticipants;
+	
 	private Group participants;
+	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	
 	public Holiday()
 	{	
@@ -25,12 +30,14 @@ public class Holiday {
 	
 	public int getNumberOfParticipants()
 	{	
-		return participants.getSize();
+		return numberOfParticipants;
 	}
 	
 	public void addParticipant(Client participant)
 	{
 		participants.addClientToGroup(participant);
+		numberOfParticipants++;
+		pcs.firePropertyChange("numberOfParticipants", numberOfParticipants-1, numberOfParticipants);
 	}
 	
 	public void removeParticipant(Client participant)
@@ -78,6 +85,11 @@ public class Holiday {
 		return participants.getClient(i);
 	}
 
-
+	 public void addPropertyChangeListener(PropertyChangeListener pcl) {
+	        pcs.addPropertyChangeListener(pcl);
+	    }
+	    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+	        pcs.removePropertyChangeListener(pcl);
+	    }
 
 }

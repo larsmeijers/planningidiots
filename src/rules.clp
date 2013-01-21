@@ -27,7 +27,6 @@
 ;   (bind ?f (?h))
 
    (call ?hfact.OBJECT addParticipant ?cfact.OBJECT)
-    
   ;  (call ?hfact.OBJECT setHolidayTheme (java.model.Theme.Sailing)
  ;   (printout t ?fact.theme crlf)
     (printout t ?hfact.numberOfParticipants crlf)

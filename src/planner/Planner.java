@@ -93,7 +93,7 @@ public class Planner {
 				while(hols.hasNext())
 				{
 					Holiday hol =(Holiday) hols.next();
-					System.out.println(hol.getHolidayTheme());
+					//System.out.println(hol.getHolidayTheme());
 					if(hol.getNumberOfParticipants() > 0)
 					{
 					System.out.println(hol.getParticipant(0).getName());
