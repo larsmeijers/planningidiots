@@ -1,6 +1,7 @@
 package model;
 
-
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 public class Client extends Person{
 	
@@ -8,7 +9,6 @@ private double weight;
 	
 private int iq;
 	
-//	TODO: Maybe change int to enum
 private int socialSkill;
 	
 private int communicativeSkill;
@@ -38,6 +38,15 @@ private Boolean hasAllergy;
 private MusicTaste musicPreference;
 	
 private Theme prefferedHoliday;
+
+private boolean isPlanned;
+
+private PropertyChangeSupport pcs;
+
+public Client()
+{
+	pcs = new PropertyChangeSupport(this);
+	}
 
 public double getWeight() {
 	return weight;
@@ -173,6 +182,30 @@ public Theme getPrefferedHoliday() {
 
 public void setPrefferedHoliday(Theme prefferedHoliday) {
 	this.prefferedHoliday = prefferedHoliday;
+}
+
+public boolean getIsPlanned() {
+	return isPlanned;
+}
+
+public void setIsPlanned(boolean isPlanned) {
+	this.isPlanned = isPlanned;
+	pcs.firePropertyChange("isPlanned", !isPlanned, isPlanned);
+}
+
+public void addPropertyChangeListener(PropertyChangeListener pcl) {
+	if(pcs == null)
+	{
+		pcs = new PropertyChangeSupport(this);
+	}
+    pcs.addPropertyChangeListener(pcl);
+}
+public void removePropertyChangeListener(PropertyChangeListener pcl) {
+	if(pcs == null)
+	{
+		pcs = new PropertyChangeSupport(this);
+	}
+    pcs.removePropertyChangeListener(pcl);
 }
 
 }

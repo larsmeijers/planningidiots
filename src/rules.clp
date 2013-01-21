@@ -14,22 +14,13 @@
 
 
 ;; if holiday is of the same theme and still empty, assign a person to it.
-;;   ?m<-(problem(name Jess))
-;;   (problem(name Jess) (OBJECT ?m))
-;;   ?h <(Holiday {numberOfParticipants == 0}) 
 -(defrule FillEmptyHolidays    
-;   (Holiday(numberOfParticipants 0) (OBJECT ?h)) ;; probere rechtstreekse cast naar object ?
- ;  (Client(prefferedHoliday h.holidayTheme) (OBJECT ?c))
-     
-   ?hfact <-(Holiday {numberOfParticipants == 0}) 
-   ?cfact <-(Client {prefferedHoliday == hfact.holidayTheme})
+   ?hfact <-(Holiday {numberOfParticipants < maxParticipants }) 
+   ?cfact <-(Client {isPlanned == FALSE && prefferedHoliday == hfact.holidayTheme })
    =>
-;   (bind ?f (?h))
-
    (call ?hfact.OBJECT addParticipant ?cfact.OBJECT)
-  ;  (call ?hfact.OBJECT setHolidayTheme (java.model.Theme.Sailing)
- ;   (printout t ?fact.theme crlf)
-    (printout t ?hfact.numberOfParticipants crlf)
+   (printout t ?hfact.numberOfParticipants crlf)
+   (printout t ?cfact.isPlanned crlf)
 )
 
 ;; queries

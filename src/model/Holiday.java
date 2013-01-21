@@ -20,10 +20,10 @@ public class Holiday {
 	private int numberOfParticipants;
 	
 	private Group participants;
-	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private PropertyChangeSupport pcs;
 	
 	public Holiday()
-	{	
+	{	pcs = new PropertyChangeSupport(this);
 		participants = new Group();
 		maxParticipants = 12;
 	}
@@ -36,6 +36,7 @@ public class Holiday {
 	public void addParticipant(Client participant)
 	{
 		participants.addClientToGroup(participant);
+		participant.setIsPlanned(true);
 		numberOfParticipants++;
 		pcs.firePropertyChange("numberOfParticipants", numberOfParticipants-1, numberOfParticipants);
 	}

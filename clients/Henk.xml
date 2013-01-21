@@ -24,4 +24,5 @@
   <hasAllergy>false</hasAllergy>
   <musicPreference>Top40</musicPreference>
   <prefferedHoliday>Music</prefferedHoliday>
+    <isPlanned>false</isPlanned>
 </client>

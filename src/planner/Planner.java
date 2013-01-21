@@ -94,9 +94,9 @@ public class Planner {
 				{
 					Holiday hol =(Holiday) hols.next();
 					//System.out.println(hol.getHolidayTheme());
-					if(hol.getNumberOfParticipants() > 0)
+					for(int i =0; i < hol.getNumberOfParticipants(); i++)
 					{
-					System.out.println(hol.getParticipant(0).getName());
+					System.out.println(hol.getParticipant(i).getName());
 					}
 				
 				}
@@ -175,6 +175,7 @@ public class Planner {
 			client.setToleranceOfStress(5);
 			client.setWeight(95);
 			client.setPrefferedHoliday(Theme.Music);
+			client.setIsPlanned(false);
 			
 			data.exportClientToXML(client);		
 		
