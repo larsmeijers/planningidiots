@@ -18,17 +18,19 @@
 ;;   (problem(name Jess) (OBJECT ?m))
 ;;   ?h <(Holiday {numberOfParticipants == 0}) 
 -(defrule FillEmptyHolidays    
-   (Holiday(numberOfParticipants 0) (OBJECT ?h)) ;; probere rechtstreekse cast naar object ?
-   (Client(prefferedHoliday h.holidayTheme) (OBJECT ?c))
+;   (Holiday(numberOfParticipants 0) (OBJECT ?h)) ;; probere rechtstreekse cast naar object ?
+ ;  (Client(prefferedHoliday h.holidayTheme) (OBJECT ?c))
      
    ?hfact <-(Holiday {numberOfParticipants == 0}) 
    ?cfact <-(Client {prefferedHoliday == hfact.holidayTheme})
    =>
 ;   (bind ?f (?h))
 
-   (call ?c name "hoi")
-   (printout t ?cfact.name crlf)
-   (printout t ?hfact.holidayTheme crlf)
+   (call ?hfact.OBJECT addParticipant ?cfact.OBJECT)
+    
+  ;  (call ?hfact.OBJECT setHolidayTheme (java.model.Theme.Sailing)
+ ;   (printout t ?fact.theme crlf)
+    (printout t ?hfact.numberOfParticipants crlf)
 )
 
 ;; queries
