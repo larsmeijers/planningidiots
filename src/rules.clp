@@ -12,6 +12,23 @@
 
 ;; rules
 
+
+;; if holiday is of the same theme and still empty, assign a person to it.
+;;   ?m<-(problem(name Jess))
+;;   (problem(name Jess) (OBJECT ?m))
+;;   ?h <(Holiday {numberOfParticipants == 0}) 
+-(defrule FillEmptyHolidays    
+   (Holiday(numberOfParticipants 0) (OBJECT ?h)) ;; probere rechtstreekse cast naar object ?
+   (Client(prefferedHoliday h.holidayTheme) (OBJECT ?c))
+   
+   ?hfact <-(Holiday {numberOfParticipants == 0}) 
+   ?cfact <-(Client {prefferedHoliday == hfact.holidayTheme})
+
+   =>
+   (call ?h addParticipant c)
+   (printout t c.name crlf)
+)
+
 ;; queries
 
 ;; functions
