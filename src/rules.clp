@@ -108,14 +108,13 @@
 
     
 ; IQ binnen | marge gemiddelde group
-; socialskills | marge gemiddelde group
-; communicative skills | marge gemiddeld group
-; presencelevel in a group | coresponding to tolerance of stress in a group
+; socialskills | marge gemiddelde group -> 5 = goed 1 = slecht
+; communicative skills | marge gemiddeld group -> 5 = goed 1 = slecht
+; presencelevel in a group | coresponding to tolerance of stress in a group -> 5 = zeer aanwezig 1 = rustig
 
 ; independence level | group gemiddeld zo hoog mogelijk
 ; mobility level | group gemiddeld zo hoog 
 ; sensibility for stress | afweging op basis van gemiddeld presence level of group
-
 ; care per day | indicator van niveau
 
 ;; THEME BASED PREFERENCES
@@ -129,20 +128,55 @@
 ; needsoneToOneguidance | max 2 per group
 ; diet | max 2 per group
 ; allergy | max 2 per group
-
 ; man vrouw verhouding ??
 
-
--(defrule FillEmptyHolidays
-    "if holiday is of the same theme and still empty, assign a person to it."
-   (declare (salience -900))
+-(defrule 4rule
+    "IQ and communicative skills."
+   (declare (salience -800))
 
    (candidate {client != nil})
    ?candidateFact <- (candidate (client ?cfact))
-   ?hfact <-(Holiday {numberOfParticipants < maxParticipants && holidayTheme == cfact.preferredHoliday && oneToOneCount < 2 && (numberOfParticipants != 1 || expectedGender == cfact.sex)}) 
+   ?hfact <-(Holiday {numberOfParticipants < maxParticipants 
+    && holidayTheme == cfact.preferredHoliday && oneToOneCount < 2 
+    && (maxAverageIQ >= cfact.iq && minAverageIQ <= cfact.iq)
+    && (maxAvgCommunicationlvl >= cfact.communicativeSkill && minAvgCommunicationlvl <= cfact.communicativeSkill)
+    && (numberOfParticipants != 11 || expectedGender == cfact.sex)}) 
    =>
    (modify ?candidateFact (client nil))
    (call ?hfact.OBJECT addParticipant ?cfact.OBJECT)
    (printout t ?hfact.numberOfParticipants crlf)
-   (printout t ?cfact.isPlanned crlf)
+   (printout t "rule4 " ?cfact.isPlanned crlf)
+)
+
+-(defrule 5rule
+    "The rule that adheres to the mimimum requirement and looks at the candidates IQ when adding a participant."
+   (declare (salience -800))
+
+   (candidate {client != nil})
+   ?candidateFact <- (candidate (client ?cfact))
+   ?hfact <-(Holiday {numberOfParticipants < maxParticipants 
+    && holidayTheme == cfact.preferredHoliday && oneToOneCount < 2 
+    && (maxAverageIQ >= cfact.iq && minAverageIQ <= cfact.iq)
+    && (numberOfParticipants != 11 || expectedGender == cfact.sex)}) 
+   =>
+   (modify ?candidateFact (client nil))
+   (call ?hfact.OBJECT addParticipant ?cfact.OBJECT)
+   (printout t ?hfact.numberOfParticipants crlf)
+   (printout t "rule5 " ?cfact.isPlanned crlf)
+)
+
+-(defrule minimumReqRule
+    "The rule that adheres to the mimimum requirement when adding a participant."
+   (declare (salience -900))
+
+   (candidate {client != nil})
+   ?candidateFact <- (candidate (client ?cfact))
+   ?hfact <-(Holiday {numberOfParticipants < maxParticipants 
+    && holidayTheme == cfact.preferredHoliday && oneToOneCount < 2 
+    && (numberOfParticipants != 11 || expectedGender == cfact.sex)}) 
+   =>
+   (modify ?candidateFact (client nil))
+   (call ?hfact.OBJECT addParticipant ?cfact.OBJECT)
+   (printout t ?hfact.numberOfParticipants crlf)
+   (printout t "minrule " ?cfact.isPlanned crlf)
 )

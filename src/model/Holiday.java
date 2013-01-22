@@ -22,6 +22,7 @@ public class Holiday {
 	
 	private char expectedGender;
 	
+	
 	private Group participants;
 	private PropertyChangeSupport pcs;
 	
@@ -110,11 +111,60 @@ public class Holiday {
 		}
 
 		public char getExpectedGender() {
-			return 'm';
+			return participants.getExpextedGender();
+		}
+		
+		private int calculateAverageIQ()
+		{
+			int sum = 0;
+			for(int i=0; i < participants.getSize(); i++)
+			{
+				sum = sum + participants.getClient(i).getIq();
+			}
+			if(participants.getSize() == 0)
+				return 0;
+			else
+			return sum / participants.getSize();
+		}
+		
+		public int getMaxAverageIQ()
+		{
+			if(calculateAverageIQ() == 0)
+				return 100;
+			else
+			return calculateAverageIQ() +15;
+		}
+		
+		public int getMinAverageIQ()
+		{
+			return calculateAverageIQ() -15;
+		}
+		
+		private int calculateAverageCommunicationLvl()
+		{
+			int sum = 0;
+			for(int i=0; i < participants.getSize(); i++)
+			{
+				sum = sum + participants.getClient(i).getCommunicativeSkill();
+			}
+			if(participants.getSize() == 0)
+				return 0;
+			else
+			return sum / participants.getSize();
+		}
+		
+		public int getMaxAvgCommunicationlvl()
+		{
+			if(calculateAverageIQ() == 0)
+				return 10;
+			else
+			return calculateAverageCommunicationLvl() +1;
+		}
+		
+		public int getMinAvgCommunicationlvl()
+		{
+			return calculateAverageCommunicationLvl() -1;
 		}
 
-		public void setExpectedGender(char expectedGender) {
-			this.expectedGender = expectedGender;
-		}
 
 }
