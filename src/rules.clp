@@ -139,12 +139,10 @@
 
    (candidate {client != nil})
    ?candidateFact <- (candidate (client ?cfact))
-   ?hfact <-(Holiday {numberOfParticipants < maxParticipants && holidayTheme == cfact.preferredHoliday}) 
-   ;?cfact <-(Client {isPlanned == FALSE && prefferedHoliday == hfact.holidayTheme })
+   ?hfact <-(Holiday {numberOfParticipants < maxParticipants && holidayTheme == cfact.preferredHoliday && oneToOneCount < 2 && (numberOfParticipants != 1 || expectedGender == cfact.sex)}) 
    =>
    (modify ?candidateFact (client nil))
    (call ?hfact.OBJECT addParticipant ?cfact.OBJECT)
    (printout t ?hfact.numberOfParticipants crlf)
    (printout t ?cfact.isPlanned crlf)
-   
 )

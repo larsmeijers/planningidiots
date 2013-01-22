@@ -18,6 +18,9 @@ public class Holiday {
 	private int maxParticipants;
 	
 	private int numberOfParticipants;
+	private int oneToOneCount;
+	
+	private char expectedGender;
 	
 	private Group participants;
 	private PropertyChangeSupport pcs;
@@ -38,6 +41,11 @@ public class Holiday {
 		participants.addClientToGroup(participant);
 		participant.setIsPlanned(true);
 		numberOfParticipants++;
+		if(participant.getNeedsOneToOneGuidance())
+		{
+			oneToOneCount++;
+			pcs.firePropertyChange("oneToOneCount", oneToOneCount-1, oneToOneCount);
+		}
 		pcs.firePropertyChange("numberOfParticipants", numberOfParticipants-1, numberOfParticipants);
 	}
 	
@@ -92,5 +100,21 @@ public class Holiday {
 	    public void removePropertyChangeListener(PropertyChangeListener pcl) {
 	        pcs.removePropertyChangeListener(pcl);
 	    }
+
+		public int getOneToOneCount() {
+			return oneToOneCount;
+		}
+
+		public void setOneToOneCount(int oneToOneCount) {
+			this.oneToOneCount = oneToOneCount;
+		}
+
+		public char getExpectedGender() {
+			return 'm';
+		}
+
+		public void setExpectedGender(char expectedGender) {
+			this.expectedGender = expectedGender;
+		}
 
 }
