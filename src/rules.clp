@@ -10,7 +10,11 @@
 (deftemplate Theme    						(declare (from-class Theme)))
 (deftemplate Client extends Person       	(declare (from-class Client)))
 
-(deftemplate candidate						(slot Client))
+(deftemplate candidate						(slot client))
+
+;facts
+(deffacts candidates
+    (candidate (client nil)))
 
 ;; queries
 (defquery findUnplannedCandidates
@@ -82,14 +86,25 @@
     ;(call ?clients.OBJECT setHasHardnessScore ?score)
     )
 
+(defrule selectCandidate
+    (declare (salience 600))
+    (Client {isPlanned == FALSE})
+    ?candidate <- (candidate {client == nil})
+    =>
+    (printout t "Ik moet een kandi selecteren" crlf)
+    (bind ?cand (selectCandidate))
+    (modify ?candidate (client ?cand))
+    )
+    
     
 (defrule printCandidate
-    "prints"
-    
-    (candidate (Client ?Client))
+        "prints"
+    ?candidate <- (candidate (client ?cand))
     =>
-    (printout t "Kandidaat: " ?Client.name crlf)
+    (printout t "Kandidaat: " ?cand.name crlf)
+    (modify ?candidate (client nil))
     )
+
     
 ; IQ binnen | marge gemiddelde group
 ; socialskills | marge gemiddelde group

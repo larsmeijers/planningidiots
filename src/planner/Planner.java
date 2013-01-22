@@ -83,8 +83,9 @@ public class Planner {
 				holidays.addAll(CountThemesInclients(data.clients, Theme.Music));
 
 
-				engine.reset();
+
 				engine.batch("rules.clp");
+				engine.reset();
 				engine.addAll(data.clients);
 				engine.addAll(holidays);
 				engine.run();
