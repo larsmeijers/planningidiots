@@ -140,6 +140,32 @@ public class Holiday {
 			return calculateAverageIQ() -15;
 		}
 		
+		private int calculateAverageAge()
+		{
+			int sum = 0;
+			for(int i=0; i < participants.getSize(); i++)
+			{
+				sum = sum + participants.getClient(i).getAge();
+			}
+			if(participants.getSize() == 0)
+				return 0;
+			else
+			return sum / participants.getSize();
+		}
+		
+		public int getMaxAvgAge()
+		{
+			if(calculateAverageIQ() == 0)
+				return 200;
+			else
+			return calculateAverageAge() + 20 ;
+		}
+		
+		public int getMinAvgAge()
+		{
+			return calculateAverageAge() - 20;
+		}
+		
 		private int calculateAverageCommunicationLvl()
 		{
 			int sum = 0;
