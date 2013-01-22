@@ -10,6 +10,33 @@
 (deftemplate Theme    						(declare (from-class Theme)))
 (deftemplate Client extends Person       	(declare (from-class Client)))
 
+(deftemplate candidate						(slot Client))
+
+;; queries
+(defquery findUnplannedCandidates
+    (Client(isPlanned FALSE)))
+
+;; functions
+(deffunction selectCandidate()
+    "Selects unplanned client with highest hardness-score. Should only be called when uplannend candidates are present"
+    
+    (bind ?candidates (run-query findUnplannedCandidates))
+    (bind ?firstToken (call ?candidates next))
+    (bind ?highest (?firstToken fact 1))
+    (bind ?highestVal ?highest.hasHardnessScore)
+    (while (?candidates hasNext)
+        (bind ?fact ((call ?candidates next) fact 1 ))
+        (bind ?factHighestVal ?fact.hasHardnessScore)
+        (if (> ?factHighestVal ?highestVal) then
+            (bind ?highest ?fact)
+            (bind ?highestVal ?factHighestVal)
+        )
+    )
+    (bind ?naam ?highest.name)
+    (printout t ?naam " has highest value: " ?highestVal crlf)
+    (return ?highest)
+ )
+
 ;; rules
 
 ; 1st determine 1 to 1 guidance
@@ -21,15 +48,19 @@
 
 (defrule determineOneToOne
     "Determine which indivduals have the maximum 2 per group constraint"
-    ?clients <-(Client {needsOneToOneGuidance == FALSE && ( hasDiet == TRUE || hasAllergy == TRUE)})
+    (declare (salience 900))
+    
+    ?clients <-(Client {needsOneToOneGuidance == FALSE && ( hasDiet == TRUE || hasAllergy == TRUE)})  
     =>
     (call ?clients.OBJECT setNeedsOneToOneGuidance TRUE )
     (printout t "I JUST SET ONE TO ONE FOR:" ?clients.name crlf)
 )
 
-(defrule determineHardnessScore
-    "Determine individuals hardness to place in a group"
-    ?clients <- (Client {needsOneToOneGuidance == TRUE && hasHardnessScore == 0})
+(defrule determineHardnessScore-1to1
+    "Determine individuals hardness to place in a group for one-to-one-guidance clients"
+    (declare (salience 800))
+    
+    ?clients <- (Client {needsOneToOneGuidance == TRUE && hasHardnessScore == 0})  
     =>
    	(bind ?sum (+ ?clients.independenceLevel( + ?clients.mobilityLevel( + ?clients.sensibilityForStress (+ ?clients.carePerDay (+  80))))))	
     (call ?clients.OBJECT setHasHardnessScore ?sum)
@@ -38,7 +69,28 @@
     ;(call ?clients.OBJECT setHasHardnessScore ?score)
     )
 
+(defrule determineHardnessScore
+    "Determine individuals hardness to place in a group"
+     (declare (salience 800))
+    
+    ?clients <- (Client {needsOneToOneGuidance == FALSE && hasHardnessScore == 0})
+    =>
+   	(bind ?sum (+ ?clients.independenceLevel( + ?clients.mobilityLevel( + ?clients.sensibilityForStress (+ ?clients.carePerDay)))))	
+    (call ?clients.OBJECT setHasHardnessScore ?sum)
+    (printout t " HARNESS IS " ?clients.hasHardnessScore crlf)
+	(printout t " HARNESS FOR " ?clients.name crlf)
+    ;(call ?clients.OBJECT setHasHardnessScore ?score)
+    )
 
+    
+(defrule printCandidate
+    "prints"
+    
+    (candidate (Client ?Client))
+    =>
+    (printout t "Kandidaat: " ?Client.name crlf)
+    )
+    
 ; IQ binnen | marge gemiddelde group
 ; socialskills | marge gemiddelde group
 ; communicative skills | marge gemiddeld group
@@ -65,18 +117,15 @@
 ; man vrouw verhouding ??
 
 
-;; if holiday is of the same theme and still empty, assign a person to it.
--(defrule FillEmptyHolidays    
-   ?hfact <-(Holiday {numberOfParticipants < maxParticipants }) 
-   ?cfact <-(Client {isPlanned == FALSE && prefferedHoliday == hfact.holidayTheme })
-   =>
-   (call ?hfact.OBJECT addParticipant ?cfact.OBJECT)
+
+;-(defrule FillEmptyHolidays
+;    "if holiday is of the same theme and still empty, assign a person to it."
+;    (declare (salience -900))
+;     
+;   ?hfact <-(Holiday {numberOfParticipants < maxParticipants }) 
+;   ?cfact <-(Client {isPlanned == FALSE && prefferedHoliday == hfact.holidayTheme })
+;   =>
+;   (call ?hfact.OBJECT addParticipant ?cfact.OBJECT)
   ; (printout t ?hfact.numberOfParticipants crlf)
   ; (printout t ?cfact.isPlanned crlf)
-)
-
-;; queries
-
-;; functions
-
-;; facts
+;)
