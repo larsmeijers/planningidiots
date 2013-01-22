@@ -1,0 +1,29 @@
+<client>
+  <name>Trudy</name>
+  <birth>1955-01-14 23:00:00.0 UTC</birth>
+  <sex>f<sex>
+  <address>verre wegstraat 3</address>
+  <city>Amsterdam</city>
+  <telephoneNumber>1234981423</telephoneNumber>
+  <insurenceNumber>123214</insurenceNumber>
+  <email>Henk@hotmail.com</email>
+  <weight>88</weight>
+  <iq>89</iq>
+  <socialSkill>2</socialSkill>
+  <communicativeSkill>1</communicativeSkill>
+  <horseRidingSkill>-1</horseRidingSkill>
+  <independenceLevel>5</independenceLevel>
+  <mobilityLevel>1</mobilityLevel>
+  <sensibilityForStress>5</sensibilityForStress>
+  <presenceLevel>4</presenceLevel>
+  <sailingIQ>-1</sailingIQ>
+  <carePerDay>5</carePerDay>
+  <fishingSeriousness>-1</fishingSeriousness>
+  <needsOneToOneGuidance>false</needsOneToOneGuidance>
+  <hasHardnessScore>0</hasHardnessScore>
+  <hasDiet>false</hasDiet>
+  <hasAllergy>false</hasAllergy>
+  <musicPreference>KinderMuziek</musicPreference>
+  <preferredHoliday>Music</preferredHoliday>
+  <isPlanned>false</isPlanned>
+</client>

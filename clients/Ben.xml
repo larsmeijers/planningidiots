@@ -1,0 +1,29 @@
+<client>
+  <name>Ben</name>
+  <birth>1988 23:00:00.0 UTC</birth>
+  <sex>m</sex>
+  <address>amsterdamseweg</address>
+  <city>Amstelveen</city>
+  <telephoneNumber>1234981423</telephoneNumber>
+  <insurenceNumber>123214</insurenceNumber>
+  <email>Henk@hotmail.com</email>
+  <weight>72.0</weight>
+  <iq>69</iq>
+  <socialSkill>1</socialSkill>
+  <communicativeSkill>4</communicativeSkill>
+  <horseRidingSkill>-1</horseRidingSkill>
+  <independenceLevel>2</independenceLevel>
+  <mobilityLevel>5</mobilityLevel>
+  <sensibilityForStress>2</sensibilityForStress>
+  <presenceLevel>1</presenceLevel>
+  <sailingIQ>-1</sailingIQ>
+  <carePerDay>4</carePerDay>
+  <fishingSeriousness>-1</fishingSeriousness>
+  <needsOneToOneGuidance>false</needsOneToOneGuidance>
+  <hasHardnessScore>0</hasHardnessScore>
+  <hasDiet>false</hasDiet>
+  <hasAllergy>false</hasAllergy>
+  <musicPreference>NederlandsTalig</musicPreference>
+  <preferredHoliday>Music</preferredHoliday>
+  <isPlanned>false</isPlanned>
+</client>

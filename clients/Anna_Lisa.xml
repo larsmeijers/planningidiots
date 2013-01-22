@@ -1,0 +1,29 @@
+<client>
+  <name>Anna_Lisa</name>
+  <birth>1954-01-14 23:00:00.0 UTC</birth>
+  <sex>f<sex>
+  <address>verre wegstraat 3</address>
+  <city>Amsterdam</city>
+  <telephoneNumber>1234981423</telephoneNumber>
+  <insurenceNumber>123214</insurenceNumber>
+  <email>Henk@hotmail.com</email>
+  <weight>55</weight>
+  <iq>87</iq>
+  <socialSkill>2</socialSkill>
+  <communicativeSkill>2</communicativeSkill>
+  <horseRidingSkill>-1</horseRidingSkill>
+  <independenceLevel>2</independenceLevel>
+  <mobilityLevel>1</mobilityLevel>
+  <sensibilityForStress>3</sensibilityForStress>
+  <presenceLevel>4</presenceLevel>
+  <sailingIQ>-1</sailingIQ>
+  <carePerDay>2</carePerDay>
+  <fishingSeriousness>-1</fishingSeriousness>
+  <needsOneToOneGuidance>false</needsOneToOneGuidance>
+  <hasHardnessScore>0</hasHardnessScore>
+  <hasDiet>false</hasDiet>
+  <hasAllergy>false</hasAllergy>
+  <musicPreference>NederlandsTalig</musicPreference>
+  <preferredHoliday>Music</preferredHoliday>
+  <isPlanned>false</isPlanned>
+</client>

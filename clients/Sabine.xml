@@ -1,0 +1,29 @@
+<client>
+  <name>Sabine</name>
+  <birth>1984 23:00:00.0 UTC</birth>
+  <sex>f</sex>
+  <address>amsterdamseweg</address>
+  <city>Amstelveen</city>
+  <telephoneNumber>1234981423</telephoneNumber>
+  <insurenceNumber>123214</insurenceNumber>
+  <email>Henk@hotmail.com</email>
+  <weight>89.0</weight>
+  <iq>86</iq>
+  <socialSkill>2</socialSkill>
+  <communicativeSkill>5</communicativeSkill>
+  <horseRidingSkill>-1</horseRidingSkill>
+  <independenceLevel>3</independenceLevel>
+  <mobilityLevel>1</mobilityLevel>
+  <sensibilityForStress>1</sensibilityForStress>
+  <presenceLevel>2</presenceLevel>
+  <sailingIQ>-1</sailingIQ>
+  <carePerDay>5</carePerDay>
+  <fishingSeriousness>-1</fishingSeriousness>
+  <needsOneToOneGuidance>false</needsOneToOneGuidance>
+  <hasHardnessScore>0</hasHardnessScore>
+  <hasDiet>false</hasDiet>
+  <hasAllergy>false</hasAllergy>
+  <musicPreference>Top40</musicPreference>
+  <preferredHoliday>Music</preferredHoliday>
+  <isPlanned>false</isPlanned>
+</client>

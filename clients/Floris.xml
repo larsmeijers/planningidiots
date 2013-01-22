@@ -1,0 +1,29 @@
+<client>
+  <name>Floris</name>
+  <birth>1969 23:00:00.0 UTC</birth>
+  <sex>m</sex>
+  <address>amsterdamseweg</address>
+  <city>Amstelveen</city>
+  <telephoneNumber>1234981423</telephoneNumber>
+  <insurenceNumber>123214</insurenceNumber>
+  <email>Henk@hotmail.com</email>
+  <weight>86.0</weight>
+  <iq>90</iq>
+  <socialSkill>4</socialSkill>
+  <communicativeSkill>2</communicativeSkill>
+  <horseRidingSkill>-1</horseRidingSkill>
+  <independenceLevel>5</independenceLevel>
+  <mobilityLevel>2</mobilityLevel>
+  <sensibilityForStress>1</sensibilityForStress>
+  <presenceLevel>3</presenceLevel>
+  <sailingIQ>-1</sailingIQ>
+  <carePerDay>5</carePerDay>
+  <fishingSeriousness>-1</fishingSeriousness>
+  <needsOneToOneGuidance>false</needsOneToOneGuidance>
+  <hasHardnessScore>0</hasHardnessScore>
+  <hasDiet>false</hasDiet>
+  <hasAllergy>false</hasAllergy>
+  <musicPreference>Top40</musicPreference>
+  <preferredHoliday>Music</preferredHoliday>
+  <isPlanned>false</isPlanned>
+</client>

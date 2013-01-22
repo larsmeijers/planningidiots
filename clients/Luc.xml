@@ -1,0 +1,29 @@
+<client>
+  <name>Luc</name>
+  <birth>1973 23:00:00.0 UTC</birth>
+  <sex>m</sex>
+  <address>amsterdamseweg</address>
+  <city>Amstelveen</city>
+  <telephoneNumber>1234981423</telephoneNumber>
+  <insurenceNumber>123214</insurenceNumber>
+  <email>Henk@hotmail.com</email>
+  <weight>55.0</weight>
+  <iq>93</iq>
+  <socialSkill>3</socialSkill>
+  <communicativeSkill>2</communicativeSkill>
+  <horseRidingSkill>-1</horseRidingSkill>
+  <independenceLevel>2</independenceLevel>
+  <mobilityLevel>4</mobilityLevel>
+  <sensibilityForStress>5</sensibilityForStress>
+  <presenceLevel>3</presenceLevel>
+  <sailingIQ>-1</sailingIQ>
+  <carePerDay>4</carePerDay>
+  <fishingSeriousness>-1</fishingSeriousness>
+  <needsOneToOneGuidance>false</needsOneToOneGuidance>
+  <hasHardnessScore>0</hasHardnessScore>
+  <hasDiet>false</hasDiet>
+  <hasAllergy>false</hasAllergy>
+  <musicPreference>NederlandsTalig</musicPreference>
+  <preferredHoliday>Music</preferredHoliday>
+  <isPlanned>false</isPlanned>
+</client>
