@@ -94,12 +94,14 @@ public class Planner {
 				while(hols.hasNext())
 				{
 					Holiday hol =(Holiday) hols.next();
-					//System.out.println(hol.getHolidayTheme());
+	//				System.out.println(hol.getHolidayTheme());
 //					for(int i =0; i < hol.getNumberOfParticipants(); i++)
 //					{
+//						System.out.println("Echt geplanned:");
 //					System.out.println(hol.getParticipant(i).getName());
+//					System.out.println("");
 //					}
-//				
+				
 				}
 
 			} catch (JessException e) {
@@ -114,7 +116,7 @@ public class Planner {
 		Double count = 0.0 ;
 		for(int i=0; i < data.clients.size(); i++){
 		
-			if(_clients.get(i).getPrefferedHoliday() == _theme)
+			if(_clients.get(i).getPreferredHoliday() == _theme)
 			{
 				count++;
 			}
@@ -175,7 +177,7 @@ public class Planner {
 			client.telephoneNumber = "1234981423";
 			client.setSensibilityForStress(5);
 			client.setWeight(95);
-			client.setPrefferedHoliday(Theme.Music);
+			client.setPreferredHoliday(Theme.Music);
 			client.setIsPlanned(false);
 			
 			data.exportClientToXML(client);		

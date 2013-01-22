@@ -41,7 +41,7 @@ private Boolean hasAllergy;
 	
 private MusicTaste musicPreference;
 	
-private Theme prefferedHoliday;
+private Theme preferredHoliday;
 
 private boolean isPlanned;
 
@@ -170,14 +170,6 @@ public void setMusicPreference(MusicTaste musicPreference) {
 	this.musicPreference = musicPreference;
 }
 
-public Theme getPrefferedHoliday() {
-	return prefferedHoliday;
-}
-
-public void setPrefferedHoliday(Theme prefferedHoliday) {
-	this.prefferedHoliday = prefferedHoliday;
-}
-
 public boolean getIsPlanned() {
 	return isPlanned;
 }
@@ -225,6 +217,14 @@ public int getCarePerDay() {
 
 public void setCarePerDay(int carePerDay) {
 	this.carePerDay = carePerDay;
+}
+
+public Theme getPreferredHoliday() {
+	return preferredHoliday;
+}
+
+public void setPreferredHoliday(Theme preferredHoliday) {
+	this.preferredHoliday = preferredHoliday;
 }
 
 }

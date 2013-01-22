@@ -89,20 +89,21 @@
 (defrule selectCandidate
     (declare (salience 600))
     (Client {isPlanned == FALSE})
-    ?candidate <- (candidate {client == nil})
+    ?candidateFact <- (candidate {client == nil})
     =>
     (printout t "Ik moet een kandi selecteren" crlf)
-    (bind ?cand (selectCandidate))
-    (modify ?candidate (client ?cand))
+    (bind ?candidate (selectCandidate))
+    (modify ?candidateFact (client ?candidate))
     )
     
     
 (defrule printCandidate
         "prints"
-    ?candidate <- (candidate (client ?cand))
+    (candidate {client != nil})
+    ?candidateFact <- (candidate (client ?cand))
     =>
     (printout t "Kandidaat: " ?cand.name crlf)
-    (modify ?candidate (client nil))
+    ;(modify ?candidateFact (client nil))
     )
 
     
@@ -132,15 +133,18 @@
 ; man vrouw verhouding ??
 
 
+-(defrule FillEmptyHolidays
+    "if holiday is of the same theme and still empty, assign a person to it."
+   (declare (salience -900))
 
-;-(defrule FillEmptyHolidays
-;    "if holiday is of the same theme and still empty, assign a person to it."
-;    (declare (salience -900))
-;     
-;   ?hfact <-(Holiday {numberOfParticipants < maxParticipants }) 
-;   ?cfact <-(Client {isPlanned == FALSE && prefferedHoliday == hfact.holidayTheme })
-;   =>
-;   (call ?hfact.OBJECT addParticipant ?cfact.OBJECT)
-  ; (printout t ?hfact.numberOfParticipants crlf)
-  ; (printout t ?cfact.isPlanned crlf)
-;)
+   (candidate {client != nil})
+   ?candidateFact <- (candidate (client ?cfact))
+   ?hfact <-(Holiday {numberOfParticipants < maxParticipants && holidayTheme == cfact.preferredHoliday}) 
+   ;?cfact <-(Client {isPlanned == FALSE && prefferedHoliday == hfact.holidayTheme })
+   =>
+   (modify ?candidateFact (client nil))
+   (call ?hfact.OBJECT addParticipant ?cfact.OBJECT)
+   (printout t ?hfact.numberOfParticipants crlf)
+   (printout t ?cfact.isPlanned crlf)
+   
+)
