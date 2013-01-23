@@ -105,12 +105,66 @@ public class Planner {
 					System.out.println("  Holiday number:"+ count);
 					System.out.println("  for holiday theme: " + hol.getHolidayTheme());
 					System.out.println("********************************");
-
+					
+					System.out.printf("%-20s|%8s|%8s|%8s|%8s|%8s|%8s|\n",
+							"Name",
+							"IQ",
+							"ComLVL",
+							"Age",
+							"MobLVL",
+							"PresLVL",
+							"SensLVL");
+					for(int i = 0; i < (20+6*8+7); i++){
+						System.out.print("-");
+					}
+					
 					for(int i =0; i < hol.getNumberOfParticipants(); i++)
 					{
-					System.out.println(hol.getParticipant(i).getName());					
+						Client part = hol.getParticipant(i);
+						System.out.printf("\n%-20s|%8d|%8d|%8d|%8d|%8d|%8d|",
+								part.getName(),
+								part.getIq(),
+								part.getCommunicativeSkill(),
+								part.getAge(),
+								part.getMobilityLevel(),
+								part.getPresenceLevel(),
+								part.getSensibilityForStress());
 					}
+					System.out.printf("\n\n%-20s|%8d|%8d|%8d|%8d|%8d|%8d|",
+							"Mean ",
+							hol.calculateAverageIQ(),
+							hol.calculateAverageCommunicationLvl(),
+							hol.calculateAverageAge(),
+							hol.calculateAverageMobilityLvl(),
+							hol.calculateAveragePresencelvl(),
+							hol.calculateAverageSensibility());
+							
+					System.out.printf("\n%-20s|%8.2f|%8.2f|%8.2f|%8.2f|%8.2f|%8.2f|",
+							"St. dev. ",
+							hol.calculateStdDevIQ(),
+							hol.calculateStdDevComLvl(),
+							hol.calculateStdDevAge(),
+							hol.calculateStdDevMobLvl(),
+							hol.calculateStdDevPresLvl(),
+							hol.calculateStdDevSensibility());
 				
+					System.out.printf("\n%-20s|%8d|%8d|%8d|%8d|%8d|%8d|",
+							"Least ",
+							hol.leastIQ(),
+							hol.leastCom(),
+							hol.leastAge(),
+							hol.leastMob(),
+							hol.leastPres(),
+							hol.leastSens());
+					
+					System.out.printf("\n%-20s|%8d|%8d|%8d|%8d|%8d|%8d|",
+							"Most ",
+							hol.mostIQ(),
+							hol.mostCom(),
+							hol.mostAge(),
+							hol.mostMob(),
+							hol.mostPres(),
+							hol.mostSens());
 				}
 
 			} catch (JessException e) {
