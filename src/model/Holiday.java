@@ -26,6 +26,8 @@ public class Holiday {
 	private Group participants;
 	private PropertyChangeSupport pcs;
 	
+	private boolean alwaysFalse = false;
+	
 	public Holiday()
 	{	pcs = new PropertyChangeSupport(this);
 		participants = new Group();
@@ -48,8 +50,28 @@ public class Holiday {
 			pcs.firePropertyChange("oneToOneCount", oneToOneCount-1, oneToOneCount);
 		}
 		pcs.firePropertyChange("numberOfParticipants", numberOfParticipants-1, numberOfParticipants);
+		
+		reCalculateProperties();
 	}
 	
+	private void reCalculateProperties() {
+		this.getMaxAverageIQ();
+		this.getMinAverageIQ();
+		
+		this.getMaxAvgCommunicationlvl();
+		this.getMinAvgCommunicationlvl();
+		
+		this.getMaxPresenceLvl();
+		this.getMaxSensLvl();
+		
+		this.getMinAvgAge();
+		this.getMaxAvgAge();
+	
+		this.getMinMobilityLevel();
+		this.getExpectedGender();
+		
+	}
+
 	public void removeParticipant(Client participant)
 	{
 		participants.removeClientFromGroup(participant);
@@ -111,7 +133,11 @@ public class Holiday {
 		}
 
 		public char getExpectedGender() {
-			return participants.getExpextedGender();
+			char prev = expectedGender;
+			expectedGender =  participants.getExpextedGender();
+			
+			pcs.firePropertyChange("expectedGender", prev, expectedGender);
+			return expectedGender;
 		}
 		
 		private int calculateAverageIQ()
@@ -122,22 +148,35 @@ public class Holiday {
 				sum = sum + participants.getClient(i).getIq();
 			}
 			if(participants.getSize() == 0)
+			{
 				return 0;
+			}
 			else
 			return sum / participants.getSize();
 		}
 		
+		private int maxAverageIQ;
 		public int getMaxAverageIQ()
 		{
+			int prevValue = maxAverageIQ;
+			
 			if(calculateAverageIQ() == 0)
-				return 100;
+				maxAverageIQ =  100;
 			else
-			return calculateAverageIQ() +15;
+				maxAverageIQ =  calculateAverageIQ() +15;
+			
+			pcs.firePropertyChange("maxAverageIQ", prevValue, maxAverageIQ);
+			return maxAverageIQ;
 		}
 		
+		private int minAverageIQ;
 		public int getMinAverageIQ()
 		{
-			return calculateAverageIQ() -15;
+			int prevValue = minAverageIQ;
+			minAverageIQ = calculateAverageIQ() -15;
+			pcs.firePropertyChange("minAverageIQ", prevValue, minAverageIQ);
+			
+			return minAverageIQ;
 		}
 		
 		private int calculateAverageAge()
@@ -153,17 +192,29 @@ public class Holiday {
 			return sum / participants.getSize();
 		}
 		
+		private int maxAvgAge;
 		public int getMaxAvgAge()
 		{
+			int prevage = maxAvgAge;
+			
 			if(calculateAverageIQ() == 0)
-				return 200;
+				maxAvgAge =  200;
 			else
-			return calculateAverageAge() + 20 ;
+				maxAvgAge =  calculateAverageAge() + 20 ;
+			
+			pcs.firePropertyChange("maxAvgAge", prevage, maxAvgAge);
+			
+			return maxAvgAge;
 		}
 		
+		private int minAvgAge;
 		public int getMinAvgAge()
 		{
-			return calculateAverageAge() - 20;
+			int prevage = minAvgAge;
+			minAvgAge = calculateAverageAge() - 20;
+			
+			pcs.firePropertyChange("minAvgAge", prevage, minAvgAge);
+			return minAvgAge;
 		}
 		
 		private int calculateAverageCommunicationLvl()
@@ -179,18 +230,131 @@ public class Holiday {
 			return sum / participants.getSize();
 		}
 		
+		private int maxAvgCommunicationlvl;
 		public int getMaxAvgCommunicationlvl()
 		{
+			int prev = maxAvgCommunicationlvl;
 			if(calculateAverageIQ() == 0)
-				return 10;
+				maxAvgCommunicationlvl = 10;
 			else
-			return calculateAverageCommunicationLvl() +1;
+				maxAvgCommunicationlvl =  calculateAverageCommunicationLvl() +1;
+			
+			pcs.firePropertyChange("maxAvgCommunicationlvl", prev, maxAvgCommunicationlvl);
+			
+			return maxAvgCommunicationlvl;
 		}
 		
+		private int minAvgCommunicationlvl;
 		public int getMinAvgCommunicationlvl()
 		{
-			return calculateAverageCommunicationLvl() -1;
+			int prev = minAvgCommunicationlvl;
+			minAvgCommunicationlvl = calculateAverageCommunicationLvl() -1;
+			
+			pcs.firePropertyChange("minAvgCommunicationlvl", prev, minAvgCommunicationlvl);
+			
+			return minAvgCommunicationlvl;
 		}
+		
+		private int calculateAverageMobilityLvl()
+		{
+			int sum = 0;
+			for(int i=0; i < participants.getSize(); i++)
+			{
+				sum = sum + participants.getClient(i).getMobilityLevel();
+			}
+			if(participants.getSize() == 0)
+				return 0;
+			else
+			return sum / participants.getSize();
+		}
+		
+		//Calculates the minimum mobility level for the next candidate of this group,
+		//based on the current average of this group, we try to keep this average around 3.
+		// so if average below 3 then we want a member with current group mobility average or higher
+		private int minMobilityLevel;
+		public int getMinMobilityLevel()
+		{
+			int prev = minMobilityLevel;
+			if(calculateAverageMobilityLvl() == 1) // if average is 1 then the candidate has to be 2 or higher.
+				minMobilityLevel =  2;
+			else
+				minMobilityLevel =  calculateAverageMobilityLvl();
+			
+			pcs.firePropertyChange("minMobilityLevel", prev, minMobilityLevel);
+			
+			return minMobilityLevel;
+		}
+		
+		private int calculateAverageSensibility()
+		{
+			int sum = 0;
+			for(int i=0; i < participants.getSize(); i++)
+			{
+				sum = sum + participants.getClient(i).getSensibilityForStress();
+			}
+			if(participants.getSize() == 0)
+				return 0;
+			else
+			return sum / participants.getSize();
+			
+		}
+		
+		private int maxPresenceLvl;
+		public int getMaxPresenceLvl()
+		{
+			int prev = maxPresenceLvl;
+			int sensOfGroup = calculateAverageSensibility();
+			if(sensOfGroup == 5)
+				maxPresenceLvl =  2;
+			else if (sensOfGroup == 4)
+				maxPresenceLvl =  3;
+			else if (sensOfGroup == 3)
+				maxPresenceLvl =  4;
+			else maxPresenceLvl =  5;
+			
+			pcs.firePropertyChange("maxPresenceLvl", prev, maxPresenceLvl);
+			return maxPresenceLvl;
+		}
+		
+		private int calculateAveragePresencelvl()
+		{
+			int sum = 0;
+			for(int i=0; i < participants.getSize(); i++)
+			{
+				sum = sum + participants.getClient(i).getPresenceLevel();
+			}
+			if(participants.getSize() == 0)
+				return 0;
+			else
+			return sum / participants.getSize();
+			
+			
+		}
+		
+		private int maxSensLvl;
+		public int getMaxSensLvl()
+		{
+			int prev = maxSensLvl;
+			int presslvl =calculateAveragePresencelvl();
+			if(presslvl == 5)
+				maxSensLvl =  2;
+			else if(presslvl == 4)
+				maxSensLvl =  3;
+			else if (presslvl == 3)
+				maxSensLvl =  4;
+			else
+				maxSensLvl =  5;
+			
+			pcs.firePropertyChange("maxSensLvl", prev, maxSensLvl);
+			return maxSensLvl;
+		}
+
+		public boolean isAlwaysFalse() {
+			return alwaysFalse;
+		}
+
+		
+		
 
 
 }

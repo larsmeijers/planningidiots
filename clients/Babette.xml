@@ -1,0 +1,29 @@
+<client>
+  <name>Babette</name>
+  <birth>1974-01-14 23:00:00.0 UTC</birth>
+  <sex>f</sex>
+  <address>verre wegstraat 3</address>
+  <city>Amsterdam</city>
+  <telephoneNumber>1234981423</telephoneNumber>
+  <insurenceNumber>123214</insurenceNumber>
+  <email>Annie@hotmail.com</email>
+  <weight>85</weight>
+  <iq>55</iq>
+  <socialSkill>4</socialSkill>
+  <communicativeSkill>4</communicativeSkill>
+  <horseRidingSkill>1</horseRidingSkill>
+  <independenceLevel>1</independenceLevel>
+  <mobilityLevel>3</mobilityLevel>
+  <sensibilityForStress>3</sensibilityForStress>
+  <presenceLevel>4</presenceLevel>
+  <sailingIQ>-1</sailingIQ>
+  <carePerDay>8</carePerDay>
+  <fishingSeriousness>-1</fishingSeriousness>
+  <needsOneToOneGuidance>true</needsOneToOneGuidance>
+  <hasHardnessScore>0</hasHardnessScore>
+  <hasDiet>false</hasDiet>
+  <hasAllergy>false</hasAllergy>
+  <musicPreference>NotApplicable</musicPreference>
+  <preferredHoliday>HorseRiding</preferredHoliday>
+  <isPlanned>false</isPlanned>
+</client>

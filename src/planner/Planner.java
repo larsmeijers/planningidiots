@@ -81,6 +81,9 @@ public class Planner {
 			try {
 				ArrayList<Holiday> holidays = new ArrayList<Holiday>();
 				holidays.addAll(CountThemesInclients(data.clients, Theme.Music));
+				holidays.addAll(CountThemesInclients(data.clients, Theme.Sailing));
+				holidays.addAll(CountThemesInclients(data.clients, Theme.HorseRiding));
+				holidays.addAll(CountThemesInclients(data.clients, Theme.Fishing));
 
 
 
@@ -91,16 +94,22 @@ public class Planner {
 				engine.run();
 				
 				Iterator<?> hols = engine.getObjects(new Filter.ByClass(Holiday.class));
+				int count = 0;
 				while(hols.hasNext())
 				{
+					count++;
 					Holiday hol =(Holiday) hols.next();
-	//				System.out.println(hol.getHolidayTheme());
-//					for(int i =0; i < hol.getNumberOfParticipants(); i++)
-//					{
-//						System.out.println("Echt geplanned:");
-//					System.out.println(hol.getParticipant(i).getName());
-//					System.out.println("");
-//					}
+					
+					System.out.println("");
+					System.out.println("********************************");
+					System.out.println("  Holiday number:"+ count);
+					System.out.println("  for holiday theme: " + hol.getHolidayTheme());
+					System.out.println("********************************");
+
+					for(int i =0; i < hol.getNumberOfParticipants(); i++)
+					{
+					System.out.println(hol.getParticipant(i).getName());					
+					}
 				
 				}
 

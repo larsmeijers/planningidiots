@@ -1,0 +1,29 @@
+<client>
+  <name>Lianne</name>
+  <birth>1984-01-14 23:00:00.0 UTC</birth>
+  <sex>f</sex>
+  <address>verre wegstraat 3</address>
+  <city>Amsterdam</city>
+  <telephoneNumber>1234981423</telephoneNumber>
+  <insurenceNumber>123214</insurenceNumber>
+  <email>Annie@hotmail.com</email>
+  <weight>55</weight>
+  <iq>80</iq>
+  <socialSkill>3</socialSkill>
+  <communicativeSkill>3</communicativeSkill>
+  <horseRidingSkill>2</horseRidingSkill>
+  <independenceLevel>4</independenceLevel>
+  <mobilityLevel>4</mobilityLevel>
+  <sensibilityForStress>5</sensibilityForStress>
+  <presenceLevel>1</presenceLevel>
+  <sailingIQ>-1</sailingIQ>
+  <carePerDay>6</carePerDay>
+  <fishingSeriousness>-1</fishingSeriousness>
+  <needsOneToOneGuidance>false</needsOneToOneGuidance>
+  <hasHardnessScore>0</hasHardnessScore>
+  <hasDiet>false</hasDiet>
+  <hasAllergy>false</hasAllergy>
+  <musicPreference>NotApplicable</musicPreference>
+  <preferredHoliday>HorseRiding</preferredHoliday>
+  <isPlanned>false</isPlanned>
+</client>

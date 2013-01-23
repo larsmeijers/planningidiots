@@ -1,0 +1,29 @@
+<client>
+  <name>Luuk</name>
+  <birth>1992-01-14 23:00:00.0 UTC</birth>
+  <sex>m</sex>
+  <address>verre wegstraat 3</address>
+  <city>Amsterdam</city>
+  <telephoneNumber>1234981423</telephoneNumber>
+  <insurenceNumber>123214</insurenceNumber>
+  <email>lars@hotmail.com</email>
+  <weight>80</weight>
+  <iq>65</iq>
+  <socialSkill>5</socialSkill>
+  <communicativeSkill>5</communicativeSkill>
+  <horseRidingSkill>1</horseRidingSkill>
+  <independenceLevel>5</independenceLevel>
+  <mobilityLevel>5</mobilityLevel>
+  <sensibilityForStress>1</sensibilityForStress>
+  <presenceLevel>5</presenceLevel>
+  <sailingIQ>-1</sailingIQ>
+  <carePerDay>6</carePerDay>
+  <fishingSeriousness>-1</fishingSeriousness>
+  <needsOneToOneGuidance>false</needsOneToOneGuidance>
+  <hasHardnessScore>0</hasHardnessScore>
+  <hasDiet>false</hasDiet>
+  <hasAllergy>false</hasAllergy>
+  <musicPreference>NotApplicable</musicPreference>
+  <preferredHoliday>HorseRiding</preferredHoliday>
+  <isPlanned>false</isPlanned>
+</client>

@@ -1,4 +1,4 @@
-;; First define templates for the model classes so we can use them
+ 	;; First define templates for the model classes so we can use them
 ;; in our planning rules. This doesn't create any model objects --
 ;; it just tells Jess to examine the classes and set up templates
 ;; using their properties
@@ -120,16 +120,23 @@
     ;(modify ?candidateFact (client nil))
     )
 
-    
-; IQ binnen | marge gemiddelde group
-; socialskills | marge gemiddelde group -> 5 = goed 1 = slecht
-; communicative skills | marge gemiddeld group -> 5 = goed 1 = slecht
-; presencelevel in a group | coresponding to tolerance of stress in a group -> 5 = zeer aanwezig 1 = rustig
-; age | marge gemiddeld groep
+;;;;;;;;; DEZE ZITTER ERIN
+		; IQ binnen | marge gemiddelde group
+		; mobility level | group gemiddeld zo hoog 
+		; communicative skills | marge gemiddeld group -> 5 = goed 1 = slecht
+		; age | marge gemiddeld groep
+		; presencelevel in a group | coresponding to tolerance of stress in a group -> 5 = zeer aanwezig 1 = rustig
+		; sensibility for stress | afweging op basis van gemiddeld presence level of group
+		
+		; HARD CONSTRAINTS
+		; needsoneToOneguidance | max 2 per group
+		; diet | max 2 per group
+		; allergy | max 2 per group
+		; man vrouw verhouding ??
 
+
+; socialskills | marge gemiddelde group -> 5 = goed 1 = slecht
 ; independence level | group gemiddeld zo hoog mogelijk
-; mobility level | group gemiddeld zo hoog 
-; sensibility for stress | afweging op basis van gemiddeld presence level of group
 ; care per day | indicator van niveau
 
 ;; THEME BASED PREFERENCES
@@ -138,21 +145,60 @@
 ; fishing seriousness | vis preferentie
 ; sailing iq | sailing preferentie
 
-;; HARD CONSTRAINTS
-; needsoneToOneguidance | max 2 per group
-; diet | max 2 per group
-; allergy | max 2 per group
-; man vrouw verhouding ??
 
 
--(defrule 3rule
-    "IQ, communicative skills and age"
-   (declare (salience -800))
+-(defrule 1rule
+    "IQ, communicative skills, age, mobility and combination presencelevel + sensibility"
+   (declare (salience -400))
 
    (candidate {client != nil})
    ?candidateFact <- (candidate (client ?cfact))
    ?hfact <-(Holiday {numberOfParticipants < maxParticipants 
-    && holidayTheme == cfact.preferredHoliday && oneToOneCount < 2 
+    && holidayTheme == cfact.preferredHoliday
+    && ( oneToOneCount < 2 || alwaysFalse == cfact.needsOneToOneGuidance )  
+    && (maxAverageIQ >= cfact.iq && minAverageIQ <= cfact.iq)
+    && (maxAvgCommunicationlvl >= cfact.communicativeSkill && minAvgCommunicationlvl <= cfact.communicativeSkill)
+    && (maxAvgAge >= cfact.age && minAvgAge <= cfact.age)
+    && (minMobilityLevel <=  cfact.mobilityLevel)
+    && (maxPresenceLvl >= cfact.presenceLevel && maxSensLvl >= cfact.sensibilityForStress )
+    && (numberOfParticipants != 11 || expectedGender == cfact.sex)}) 
+   =>
+   (modify ?candidateFact (client nil))
+   (call ?hfact.OBJECT addParticipant ?cfact.OBJECT)
+   (printout t ?hfact.numberOfParticipants crlf)
+   (printout t "rule1 " ?cfact.iq " " ?hfact.maxAverageIQ " "?hfact.minAverageIQ crlf)
+)
+
+-(defrule 2rule
+    "IQ, communicative skills, age and mobility"
+   (declare (salience -500))
+
+   (candidate {client != nil})
+   ?candidateFact <- (candidate (client ?cfact))
+   ?hfact <-(Holiday {numberOfParticipants < maxParticipants 
+    && holidayTheme == cfact.preferredHoliday
+    && ( oneToOneCount < 2 || alwaysFalse == cfact.needsOneToOneGuidance ) 
+    && (maxAverageIQ >= cfact.iq && minAverageIQ <= cfact.iq)
+    && (maxAvgCommunicationlvl >= cfact.communicativeSkill && minAvgCommunicationlvl <= cfact.communicativeSkill)
+    && (maxAvgAge >= cfact.age && minAvgAge <= cfact.age)
+    && (minMobilityLevel <=  cfact.mobilityLevel)
+    && (numberOfParticipants != 11 || expectedGender == cfact.sex)}) 
+   =>
+   (modify ?candidateFact (client nil))
+   (call ?hfact.OBJECT addParticipant ?cfact.OBJECT)
+   (printout t ?hfact.numberOfParticipants crlf)
+   (printout t "rule2 " ?cfact.isPlanned crlf)
+)
+
+-(defrule 3rule
+    "IQ, communicative skills and age"
+   (declare (salience -600))
+
+   (candidate {client != nil})
+   ?candidateFact <- (candidate (client ?cfact))
+   ?hfact <-(Holiday {numberOfParticipants < maxParticipants 
+    && holidayTheme == cfact.preferredHoliday 
+    && ( oneToOneCount < 2 || alwaysFalse == cfact.needsOneToOneGuidance )  
     && (maxAverageIQ >= cfact.iq && minAverageIQ <= cfact.iq)
     && (maxAvgCommunicationlvl >= cfact.communicativeSkill && minAvgCommunicationlvl <= cfact.communicativeSkill)
     && (maxAvgAge >= cfact.age && minAvgAge <= cfact.age)
@@ -166,12 +212,13 @@
 
 -(defrule 4rule
     "IQ and communicative skills."
-   (declare (salience -800))
+   (declare (salience -700))
 
    (candidate {client != nil})
    ?candidateFact <- (candidate (client ?cfact))
    ?hfact <-(Holiday {numberOfParticipants < maxParticipants 
-    && holidayTheme == cfact.preferredHoliday && oneToOneCount < 2 
+    && holidayTheme == cfact.preferredHoliday
+    && ( oneToOneCount < 2 || alwaysFalse == cfact.needsOneToOneGuidance )  
     && (maxAverageIQ >= cfact.iq && minAverageIQ <= cfact.iq)
     && (maxAvgCommunicationlvl >= cfact.communicativeSkill && minAvgCommunicationlvl <= cfact.communicativeSkill)
     && (numberOfParticipants != 11 || expectedGender == cfact.sex)}) 
@@ -189,7 +236,8 @@
    (candidate {client != nil})
    ?candidateFact <- (candidate (client ?cfact))
    ?hfact <-(Holiday {numberOfParticipants < maxParticipants 
-    && holidayTheme == cfact.preferredHoliday && oneToOneCount < 2 
+    && holidayTheme == cfact.preferredHoliday
+    && ( oneToOneCount < 2 || alwaysFalse == cfact.needsOneToOneGuidance ) 
     && (maxAverageIQ >= cfact.iq && minAverageIQ <= cfact.iq)
     && (numberOfParticipants != 11 || expectedGender == cfact.sex)}) 
    =>
@@ -206,7 +254,8 @@
    (candidate {client != nil})
    ?candidateFact <- (candidate (client ?cfact))
    ?hfact <-(Holiday {numberOfParticipants < maxParticipants 
-    && holidayTheme == cfact.preferredHoliday && oneToOneCount < 2 
+    && holidayTheme == cfact.preferredHoliday 
+    && ( oneToOneCount < 2 || alwaysFalse == cfact.needsOneToOneGuidance ) 
     && (numberOfParticipants != 11 || expectedGender == cfact.sex)}) 
    =>
    (modify ?candidateFact (client nil))
